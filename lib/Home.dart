@@ -10,12 +10,13 @@ class ScreenHome extends StatefulWidget {
 class _HomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
-    return Container( 
-      // Home: Scaffold(
-      //   appBar: AppBar(
-      //     title: Text("Home"),
-      //   )
-      // )
+    return MaterialApp( 
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Home"),
+          centerTitle: true,
+        )
+      )
     );
   }
 }
