@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_app/Home.dart';
 
-void main() {
-  runApp(Login());
-}
+void main() => runApp(
+  MaterialApp(
+    title: "App",
+    home: Login(),
+  )
+);
 
 class Login extends StatefulWidget {
-  const Login({ Key key }) : super(key: key);
+  const Login({Key key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -24,30 +27,27 @@ class _LoginState extends State<Login> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
-          children:<Widget> [
+          children: <Widget>[
             Container(
               child: TextFormField(
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.person),
-                  labelText: "Usuario"
-                ),
+                    icon: Icon(Icons.person), labelText: "Usuario"),
               ),
             ),
             Container(
               child: TextFormField(
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.password),
-                  labelText: "password"
-                ),
+                    icon: Icon(Icons.password), labelText: "password"),
               ),
             ),
             Container(
-              child: ElevatedButton(
+              child: TextButton(
                 style: TextButton.styleFrom(
-                  primary: Colors.black,
+                  primary: Color.fromARGB(255, 255, 255, 255),
                   onSurface: Colors.blue,
+                  backgroundColor: Colors.blue,
                 ),
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ScreenHome()),
