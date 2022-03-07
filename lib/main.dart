@@ -55,6 +55,18 @@ class _LoginState extends State<Login> {
                 },
                 child: Text("Logar"),
               ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Color(0xFF090F13),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 5,
+                    color: Color(0x3314181B),
+                    offset: Offset(0, 2),
+                  )
+                ]
+              )
             )
           ],
         ),
