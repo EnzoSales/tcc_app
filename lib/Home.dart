@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tcc_app/cameraPage.dart';
+
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({Key key}) : super(key: key);
@@ -28,8 +30,13 @@ class _HomeState extends State<ScreenHome> {
                   onSurface: Color.fromARGB(255, 130, 9, 151),
                   backgroundColor: Color.fromARGB(255, 130, 9, 151),
                 ),
-                child: Icon(Icons.camera),
-                onPressed:() {},
+                child: Icon(Icons.camera_alt),
+                onPressed:() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => cameraPage(), fullscreenDialog: true)
+                  );
+                },
               ),
             )
           ],
