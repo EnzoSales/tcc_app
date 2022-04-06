@@ -34,7 +34,7 @@ class _HomeState extends State<ScreenHome> {
                 onPressed:() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => cameraPage(), fullscreenDialog: true)
+                    MaterialPageRoute(builder: (context) => DocumentosPage(), fullscreenDialog: true)
                   );
                 },
               ),
