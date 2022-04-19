@@ -23,20 +23,30 @@ class _HomeState extends State<ScreenHome> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
-              
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Color.fromARGB(255, 255, 255, 255),
-                  onSurface: Color.fromARGB(255, 130, 9, 151),
-                  backgroundColor: Color.fromARGB(255, 130, 9, 151),
+              margin: const EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                color: Colors.purple,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              width: 250,
+              height: 250,
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.cyan,
+                  shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.camera_alt),
-                onPressed:() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DocumentosPage(), fullscreenDialog: true)
-                  );
-                },
+                height: 50,
+                width: 50,
+                child: TextButton(
+                  child: Icon(Icons.camera_alt),
+                  onPressed:() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DocumentosPage(), fullscreenDialog: true)
+                    );
+                  },
+                ),
               ),
             )
           ],

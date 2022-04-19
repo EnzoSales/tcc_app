@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:tcc_app/lancarDados.dart';
 
 class DocumentosPage extends StatefulWidget {
   DocumentosPage({Key key}) : super(key: key);
@@ -68,6 +69,17 @@ class _DocumentosPageState extends State<DocumentosPage> {
         backgroundColor: Colors.grey[900],
         centerTitle: true,
         elevation: 0,
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Lancamento(), fullscreenDialog: true)
+              );
+            },
+            child: Icon(Icons.arrow_right_alt_outlined),
+          )
+        ],
       ),
       body: Container(
         color: Colors.grey[900],
