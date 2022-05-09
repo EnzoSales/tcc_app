@@ -25,7 +25,7 @@ class _HomeState extends State<ScreenHome> {
             Container(
               margin: const EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: Colors.purple,
+                color: Color.fromRGBO(156, 39, 176, 1),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               width: 250,
