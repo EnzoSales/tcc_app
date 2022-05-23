@@ -18,6 +18,8 @@ dependencies:
   camera: 0.9.4+19
   geolocator: ^7.3.0
   geocoding: ^2.0.0
+  clound_firestore: ^2.3.0
+  permission_handler: 9.2.0
   font_awesome_flutter: 8.11.0
   google_fonts: 2.1.0
   google_sign_in: 5.2.1

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_app/Home.dart';
 import 'package:tcc_app/loginGoogle.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
@@ -8,9 +12,9 @@ void main() => runApp(
   MaterialApp(
     title: "App",
     home: Login(),
+    
   )
 );
-
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -21,6 +25,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
+  
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -32,34 +38,6 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Container(
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.person), labelText: "Usuario"),
-              ),
-            ),
-            Container(
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.password), labelText: "password"),
-              ),
-            ),
-            Container(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Color.fromARGB(255, 255, 255, 255),
-                  onSurface: Colors.blue,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ScreenHome()),
-                  );
-                },
-                child: Text("Logar"),
-              ),
-            ),
             _signInButton()
           ],
         ),
@@ -106,4 +84,5 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+  
 }
