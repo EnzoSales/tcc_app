@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_app/Home.dart';
@@ -59,7 +57,6 @@ class _LoginState extends State<Login> {
             ),
           );
         });
-        FirebaseFirestore.instance.collection('tccProject-27997').add({'usuario':GoogleSignInAccount});
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
