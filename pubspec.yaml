@@ -18,9 +18,8 @@ dependencies:
   camera: 0.9.4+19
   geolocator: ^7.3.0
   geocoding: ^2.0.0
-  clound_firestore: ^2.3.0
+  font_awesome_flutter: ^9.2.0
   permission_handler: 9.2.0
-  font_awesome_flutter: 8.11.0
   google_fonts: 2.1.0
   google_sign_in: 5.2.1
   intl: 0.17.0
@@ -41,7 +40,7 @@ dependencies:
   # firebase_core: ^0.4.0+9
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
-  firebase_analytics: ^5.0.2
+  #firebase_analytics: ^5.0.2
 
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore

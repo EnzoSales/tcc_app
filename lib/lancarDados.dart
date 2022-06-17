@@ -1,17 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:tcc_app/loginGoogle.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Lancamento extends StatefulWidget {
   const Lancamento({ Key key }) : super(key: key);
 
   @override
   State<Lancamento> createState() => _LancamentoState();
+
+  void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+}
 }
 
 class _LancamentoState extends State<Lancamento> {
-
   double lat = 0.0;
   double long = 0.0;
   String erro = "";
@@ -53,26 +62,6 @@ class _LancamentoState extends State<Lancamento> {
               children: [
                 Text(
                   "Local"
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.black,
-                    )
-                  ),
-                ),
-                Text(
-                  "Data/Horario"
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.black,
-                    )
-                  ),
-                  child: Text(DateFormat("'Data numérica:' dd/MM/yyyy").format(data)),
                 ),
                 Text(
                   "Tipo de Lixo:"
@@ -153,6 +142,35 @@ class _LancamentoState extends State<Lancamento> {
                   ),
                 ),
               ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                TextButton(
+                  onPressed: (){
+                    final firestoreInstance = FirebaseFirestore.instance;
+                    var firebaseUser =  FirebaseAuth.instance.currentUser;
+                    firestoreInstance.collection("usuarios").doc(firebaseUser.uid).set(
+                    {
+                      "tipo de lixo":"",
+                      "data" : DateFormat().format(data),
+                      "Local": {
+                        "latitude" : lat,
+                        "longitude" : long,
+                        "concluido": false,
+                        "apagado": false
+                      }
+                    },SetOptions(merge: true)).then((_){
+                        print("success!");
+                    });
+                    // FirebaseFirestore.instance
+                    // .collection('usuario')
+                    // .add({'Data':DateFormat("'Data numérica:' dd/MM/yyyy").format(data), 'posição':getPosicao()});
+                  },
+                  child: Text("Enviar")
+                )
+              ]
             )
           ],
         )

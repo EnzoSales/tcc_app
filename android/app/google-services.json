@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "672122520666",
+    "firebase_url": "https://tccproject-27997-default-rtdb.firebaseio.com",
     "project_id": "tccproject-27997",
     "storage_bucket": "tccproject-27997.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "672122520666-s56ocj2edt8hrthl0seqspim7no140qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tcc_app",
+            "certificate_hash": "52c229cca0a53d60d99b1fe4eda3f2ee42b1606b"
+          }
+        },
         {
           "client_id": "672122520666-p05fuvvc9p98ebrbef4dpqo4mhp078kb.apps.googleusercontent.com",
           "client_type": 3
