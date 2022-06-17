@@ -15,12 +15,10 @@ import 'package:tcc_app/HomePage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    MaterialApp(
-      title: "App",
-      home: Login(),
-    )
-  );
+  runApp(MaterialApp(
+    title: "App",
+    home: Login(),
+  ));
 }
 
 class Login extends StatefulWidget {
@@ -32,10 +30,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
-  
-  
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Constants.title,
@@ -49,10 +44,10 @@ class _LoginState extends State<Login> {
 }
 
 class Navigate {
-  static Map<String, Widget Function(BuildContext)> routes =   {
-    '/' : (context) => WelcomePage(),
-    '/sign-in' : (context) => SignPage(),
-    '/home'  : (context) => HomePage()
+  static Map<String, Widget Function(BuildContext)> routes = {
+    '/': (context) => WelcomePage(),
+    '/sign-in': (context) => SignPage(),
+    '/home': (context) => HomePage()
   };
 }
 
