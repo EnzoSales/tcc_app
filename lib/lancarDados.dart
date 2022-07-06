@@ -1,209 +1,161 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tcc_app/loginGoogle.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:tcc_app/homePage.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class Lancamento extends StatefulWidget {
-  const Lancamento({ Key key }) : super(key: key);
+  const Lancamento({Key key}) : super(key: key);
 
   @override
   State<Lancamento> createState() => _LancamentoState();
 
   void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-}
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
 }
 
 class _LancamentoState extends State<Lancamento> {
   double lat = 0.0;
   double long = 0.0;
   String erro = "";
-
+  final List<String> items = [
+    'Lixo Comum',
+    'Reciclavel',
+    'Caçamba',
+    'Entulho',
+    'Moveis/Eletronicos',
+    'Lixo Toxico'
+  ];
+  String selectedValue;
 
   @override
   Widget build(BuildContext context) {
+    User user = FirebaseAuth.instance.currentUser;
+    getPosicao();
     DateTime data = DateTime.now();
-    // bool _value = false;
-    int val = -1;
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Lançamento"),
-          centerTitle: true,
-        ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container( 
-                  decoration: BoxDecoration(
-                    border: Border.all(
+          appBar: AppBar(
+            title: Text("Lançamento"),
+            centerTitle: true,
+          ),
+          body: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
                       color: Colors.black,
                       width: 2,
-                    )
+                    )),
+                  )
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      hint: Text(
+                        'Select Item',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                      items: items
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value as String;
+                        });
+                      },
+                      buttonHeight: 40,
+                      buttonWidth: 140,
+                      itemHeight: 40,
+                    ),
                   ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  "Local"
-                ),
-                Text(
-                  "Tipo de Lixo:"
-                ),
-                ListTile(
-                  title: Text("Lixo Comum"),
-                  leading: Radio(
-                    value: 1,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),
-                ListTile(
-                  title: Text("Reciclavel"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),
-                ListTile(
-                  title: Text("Caçamba"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),ListTile(
-                  title: Text("Entulho/Moveis"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),ListTile(
-                  title: Text("Reciclavel"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),ListTile(
-                  title: Text("Lixo Toxico"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Color.fromRGBO(156, 39, 176, 1),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                TextButton(
-                  onPressed: (){
-                    final firestoreInstance = FirebaseFirestore.instance;
-                    var firebaseUser =  FirebaseAuth.instance.currentUser;
-                    firestoreInstance.collection("usuarios").doc(firebaseUser.uid).set(
-                    {
-                      "tipo de lixo":"",
-                      "data" : DateFormat().format(data),
-                      "Local": {
-                        "latitude" : lat,
-                        "longitude" : long,
-                        "concluido": false,
-                        "apagado": false
-                      }
-                    },SetOptions(merge: true)).then((_){
-                        print("success!");
-                    });
-                    // FirebaseFirestore.instance
-                    // .collection('usuario')
-                    // .add({'Data':DateFormat("'Data numérica:' dd/MM/yyyy").format(data), 'posição':getPosicao()});
-                  },
-                  child: Text("Enviar")
-                )
-              ]
-            )
-          ],
-        )
-      ),
+                ],
+              ),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          final firestoreInstance = FirebaseFirestore.instance;
+                          var firebaseUser = FirebaseAuth.instance.currentUser;
+                          firestoreInstance.collection(firebaseUser.uid).add({
+                            "tipo de lixo": selectedValue,
+                            "data": DateFormat("dd/MM/yyyy").format(data),
+                            "Local": {
+                              "latitude": lat,
+                              "longitude": long,
+                              "concluido": false,
+                              "apagado": false
+                            }
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                  fullscreenDialog: true));
+                        },
+                        child: Text("Enviar"))
+                  ])
+            ],
+          )),
     );
   }
-  getPosicao() async{
+
+  getPosicao() async {
     try {
       Position posicao = await _posicaoAtual();
       lat = posicao.latitude;
       long = posicao.longitude;
-    } catch (e){
+    } catch (e) {
       erro = e.toString();
-    }  
+    }
   }
 
-  Future<Position>_posicaoAtual() async{
+  Future<Position> _posicaoAtual() async {
     LocationPermission permissao;
     bool ativado = await Geolocator.isLocationServiceEnabled();
-    if(! ativado){
+    if (!ativado) {
       return Future.error("Por favor habilite a nocalização no smartphone");
     }
 
     permissao = await Geolocator.checkPermission();
-    if(permissao == LocationPermission.denied){
-
+    if (permissao == LocationPermission.denied) {
       permissao = await Geolocator.requestPermission();
-      if(permissao == LocationPermission.denied){
+      if (permissao == LocationPermission.denied) {
         return Future.error("Você precisa autorizar o acesso a localização");
       }
     }
 
-    if(permissao == LocationPermission.deniedForever){
+    if (permissao == LocationPermission.deniedForever) {
       return Future.error("Você precisa autorizar o acesso a localização");
     }
 

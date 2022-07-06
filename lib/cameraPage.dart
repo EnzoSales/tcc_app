@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -73,9 +74,10 @@ class _DocumentosPageState extends State<DocumentosPage> {
           TextButton(
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Lancamento(), fullscreenDialog: true)
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Lancamento(),
+                      fullscreenDialog: true));
             },
             child: Icon(Icons.arrow_right_alt_outlined),
           )
@@ -89,7 +91,10 @@ class _DocumentosPageState extends State<DocumentosPage> {
       ),
       floatingActionButton: (imagem != null)
           ? FloatingActionButton.extended(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Lancamento(), fullscreenDialog: true)),
               label: Text('Finalizar'),
             )
           : null,

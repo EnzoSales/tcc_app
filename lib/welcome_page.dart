@@ -73,18 +73,18 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 SizedBox(
                   width: size.width * 0.8,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: Text(
-                      Constants.textSignIn,
-                      style: TextStyle(color: Constants.kBlackColor),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Constants.kGreyColor),
-                        side: MaterialStateProperty.all<BorderSide>(
-                            BorderSide.none)),
-                  ),
+                  // child: OutlinedButton(
+                  //   onPressed: () {},
+                  //   child: Text(
+                  //     Constants.textSignIn,
+                  //     style: TextStyle(color: Constants.kBlackColor),
+                  //   ),
+                  //   style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all<Color>(
+                  //           Constants.kGreyColor),
+                  //       side: MaterialStateProperty.all<BorderSide>(
+                  //           BorderSide.none)),
+                  // ),
                 )
               ],
             ),

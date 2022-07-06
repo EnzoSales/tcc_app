@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tcc_app/services/firebase_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
-import 'package:tcc_app/sign_in_page.dart';
-import 'package:tcc_app/welcome_page.dart';
+import 'package:tcc_app/cameraPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -17,6 +17,10 @@ class _HomePageState extends State<HomePage> {
   User user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
+    final firestoreInstance = FirebaseFirestore.instance;
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    // firestoreInstance.collection("usuarios").doc(firebaseUser.uid).set({
+    // });
     super.initState();
   }
 
@@ -38,18 +42,44 @@ class _HomePageState extends State<HomePage> {
               },
             )
           ],
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.blue),
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarColor: Colors.purple),
           title: Text("Home"),
         ),
         body: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(user.email),
-            Text(user.displayName),
-            CircleAvatar(
-              backgroundImage: NetworkImage(user.photoURL),
-              radius: 20,
+            Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(user.photoURL),
+                    radius: 20,
+                  ),
+                ]),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.purple,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DocumentosPage(),
+                              fullscreenDialog: true));
+                    },
+                  ),
+                ),
+              ],
             )
           ],
         )));

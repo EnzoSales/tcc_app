@@ -1,15 +1,9 @@
 import 'dart:collection';
 import 'package:tcc_app/welcome_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_app/Home.dart';
-import 'package:tcc_app/loginGoogle.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tcc_app/sign_in_page.dart';
-import 'package:tcc_app/services/firebase_services.dart';
 import 'package:tcc_app/HomePage.dart';
 
 void main() async {
