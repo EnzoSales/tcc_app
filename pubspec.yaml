@@ -15,13 +15,14 @@ dependencies:
   easy_debounce: 2.0.1
   firebase_auth: 3.4.1
   firebase_core: 1.19.1
-  camera: 0.9.4+19
+  camera: 0.10.0
   geolocator: ^7.3.0
   geocoding: ^2.0.0
   font_awesome_flutter: ^9.2.0
   permission_handler: 9.2.0
   google_fonts: 2.1.0
-  google_sign_in: 5.2.1
+  google_sign_in: 5.4.0
+  path_provider: ^2.0.11
   dropdown_button2: ^1.6.3
   intl: 0.17.0
   json_path: 0.2.1

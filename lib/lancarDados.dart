@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tcc_app/homePage.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+// import 'package:tcc_app/cameraPage.dart';
 
 class Lancamento extends StatefulWidget {
   const Lancamento({Key key}) : super(key: key);
@@ -35,9 +36,8 @@ class _LancamentoState extends State<Lancamento> {
 
   @override
   Widget build(BuildContext context) {
-    User user = FirebaseAuth.instance.currentUser;
     getPosicao();
-    DateTime data = DateTime.now();
+    // DateTime data = DateTime.now();
 
     return MaterialApp(
       home: Scaffold(
@@ -109,7 +109,7 @@ class _LancamentoState extends State<Lancamento> {
                           var firebaseUser = FirebaseAuth.instance.currentUser;
                           firestoreInstance.collection(firebaseUser.uid).add({
                             "tipo de lixo": selectedValue,
-                            "data": DateFormat("dd/MM/yyyy").format(data),
+                            "data": DateTime.now(),
                             "Local": {
                               "latitude": lat,
                               "longitude": long,

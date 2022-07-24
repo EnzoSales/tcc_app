@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tcc_app/services/firebase_services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
@@ -17,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   User user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
-    final firestoreInstance = FirebaseFirestore.instance;
-    var firebaseUser = FirebaseAuth.instance.currentUser;
+    // final firestoreInstance = FirebaseFirestore.instance;
+    // var firebaseUser = FirebaseAuth.instance.currentUser;
     // firestoreInstance.collection("usuarios").doc(firebaseUser.uid).set({
     // });
     super.initState();

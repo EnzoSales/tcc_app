@@ -15,7 +15,7 @@ class _SignPageState extends State<SignPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    OutlineInputBorder border = OutlineInputBorder(
+    OutlineInputBorder(
         borderSide: BorderSide(color: Constants.kBorderColor, width: 3.0));
     return Scaffold(
         resizeToAvoidBottomInset: false,

@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:tcc_app/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -76,4 +75,16 @@ class Constants {
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,
       statusBarIconBrightness: Brightness.dark);
+}
+class Tarefa 
+{
+  String nome;
+  DateTime data;
+  bool concluida;
+
+  Tarefa(String nome) {
+    this.concluida = false;
+    this.nome = nome;
+    this.data = DateTime.now();
+  } 
 }
