@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
 import 'package:tcc_app/cameraPage.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  User user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     // final firestoreInstance = FirebaseFirestore.instance;
@@ -49,19 +50,37 @@ class _HomePageState extends State<HomePage> {
         body: Center(
             child: Column(
           children: <Widget>[
-            Row(
+            Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(user.photoURL),
+                children:[
+                  Container(
+                    child: CircleAvatar(
+                    backgroundImage: NetworkImage(user!.photoURL!),
                     radius: 20,
+                  )),
+                  Container(
+                    child: Text("Denuncias enviadas:"),
                   ),
+                  Container(
+                    child:CheckboxListTile(
+                      title: const Text('Animate Slowly'),
+                      value: timeDilation != 1.0,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          timeDilation = value! ? 10.0 : 1.0;
+                        });
+                      },
+                      secondary: const Icon(Icons.hourglass_empty),
+                    )
+                  )
                 ]),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
+              children:[
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.purple,

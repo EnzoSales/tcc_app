@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tcc_app/services/firebase_services.dart';
 
 class SignPage extends StatefulWidget {
-  const SignPage({Key key}) : super(key: key);
+  const SignPage({Key? key}) : super(key: key);
 
   @override
   State<SignPage> createState() => _SignPageState();
@@ -43,9 +43,9 @@ class _SignPageState extends State<SignPage> {
         ])));
   }
 
-  Widget buildRowDivider({Size size}) {
+  Widget buildRowDivider({Size? size}) {
     return SizedBox(
-      width: size.width * 0.8,
+      width: size!.width * 0.8,
       child: Row(children: <Widget>[
         Expanded(child: Divider(color: Constants.kDarkGreyColor)),
         Padding(
@@ -61,7 +61,7 @@ class _SignPageState extends State<SignPage> {
 }
 
 class GoogleSignIn extends StatefulWidget {
-  GoogleSignIn({Key key}) : super(key: key);
+  GoogleSignIn({Key? key}) : super(key: key);
 
   @override
   _GoogleSignInState createState() => _GoogleSignInState();
@@ -110,13 +110,13 @@ class _GoogleSignInState extends State<GoogleSignIn> {
         : CircularProgressIndicator();
   }
 
-  void showMessage(String message) {
+  void showMessage(String? message) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Error"),
-            content: Text(message),
+            content: Text(message!),
             actions: [
               TextButton(
                 child: Text("Ok"),

@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:tcc_app/lancarDados.dart';
 
 class DocumentosPage extends StatefulWidget {
-  DocumentosPage({Key key}) : super(key: key);
+  DocumentosPage({Key? key}) : super(key: key);
 
   @override
   _DocumentosPageState createState() => _DocumentosPageState();
@@ -13,9 +13,9 @@ class DocumentosPage extends StatefulWidget {
 
 class _DocumentosPageState extends State<DocumentosPage> {
   List<CameraDescription> cameras = [];
-  CameraController controller;
-  XFile imagem;
-  Size size;
+  CameraController? controller;
+  XFile? imagem;
+  Size? size;
 
   @override
   void initState() {
@@ -103,19 +103,19 @@ class _DocumentosPageState extends State<DocumentosPage> {
 
   _arquivoWidget() {
     return Container(
-      width: size.width - 50,
-      height: size.height - (size.height / 3),
+      width: size!.width - 50,
+      height: size!.height - (size!.height / 3),
       child: imagem == null
           ? _cameraPreviewWidget()
           : Image.file(
-              File(imagem.path),
+              File(imagem!.path),
               fit: BoxFit.contain,
             ),
     );
   }
 
   _cameraPreviewWidget() {
-    final CameraController cameraController = controller;
+    final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
       return Text('Widget para Câmera que não está disponível');
@@ -123,7 +123,7 @@ class _DocumentosPageState extends State<DocumentosPage> {
       return Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
-          CameraPreview(controller),
+          CameraPreview(controller!),
           _botaoCapturaWidget(),
         ],
       );
@@ -149,7 +149,7 @@ class _DocumentosPageState extends State<DocumentosPage> {
   }
 
   tirarFoto() async {
-    final CameraController cameraController = controller;
+    final CameraController? cameraController = controller;
 
     if (cameraController != null && cameraController.value.isInitialized) {
       try {

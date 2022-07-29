@@ -9,7 +9,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 // import 'package:tcc_app/cameraPage.dart';
 
 class Lancamento extends StatefulWidget {
-  const Lancamento({Key key}) : super(key: key);
+  const Lancamento({Key? key}) : super(key: key);
 
   @override
   State<Lancamento> createState() => _LancamentoState();
@@ -32,7 +32,7 @@ class _LancamentoState extends State<Lancamento> {
     'Moveis/Eletronicos',
     'Lixo Toxico'
   ];
-  String selectedValue;
+  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class _LancamentoState extends State<Lancamento> {
                         onPressed: () {
                           final firestoreInstance = FirebaseFirestore.instance;
                           var firebaseUser = FirebaseAuth.instance.currentUser;
-                          firestoreInstance.collection(firebaseUser.uid).add({
+                          firestoreInstance.collection(firebaseUser!.uid).add({
                             "tipo de lixo": selectedValue,
                             "data": DateTime.now(),
                             "Local": {

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tcc_app/main.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key key}) : super(key: key);
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -13,7 +13,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    User result = FirebaseAuth.instance.currentUser;
+    User? result = FirebaseAuth.instance.currentUser;
     return Scaffold(
         backgroundColor: Constants.kPrimaryColor,
         body: AnnotatedRegion(

@@ -15,7 +15,7 @@ void main() async {
 }
 
 class Login extends StatefulWidget {
-  const Login({Key key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -78,9 +78,9 @@ class Constants {
 }
 class Tarefa 
 {
-  String nome;
-  DateTime data;
-  bool concluida;
+  late String nome;
+  late DateTime data;
+  late bool concluida;
 
   Tarefa(String nome) {
     this.concluida = false;
