@@ -1,27 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:tcc_app/services/firebase_services.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
 import 'package:tcc_app/cameraPage.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:tcc_app/testeExibição.dart';
+import 'package:camera/camera.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
+
+  void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
 }
 
 class _HomePageState extends State<HomePage> {
   User? user = FirebaseAuth.instance.currentUser;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+
   @override
   void initState() {
-    // final firestoreInstance = FirebaseFirestore.instance;
-    // var firebaseUser = FirebaseAuth.instance.currentUser;
-    // firestoreInstance.collection("usuarios").doc(firebaseUser.uid).set({
-    // });
     super.initState();
   }
 
@@ -51,36 +57,38 @@ class _HomePageState extends State<HomePage> {
             child: Column(
           children: <Widget>[
             Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children:[
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   Container(
-                    child: CircleAvatar(
+                      child: CircleAvatar(
                     backgroundImage: NetworkImage(user!.photoURL!),
                     radius: 20,
-                  )),
-                  Container(
-                    child: Text("Denuncias enviadas:"),
-                  ),
-                  Container(
-                    child:CheckboxListTile(
-                      title: const Text('Animate Slowly'),
-                      value: timeDilation != 1.0,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          timeDilation = value! ? 10.0 : 1.0;
-                        });
-                      },
-                      secondary: const Icon(Icons.hourglass_empty),
-                    )
-                  )
+                  ))
                 ]),
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-              children:[
+              children: <Widget>[
+                Container(
+                  color: Color.fromARGB(255, 2, 141, 255),
+                  child: TextButton(
+                    onPressed: () async {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => MyApp()));
+                    },
+                    child: Text(
+                      "Denuncias",
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16.0),
+                      primary: Color.fromARGB(255, 255, 255, 255),
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  
+                ),
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.purple,
@@ -89,12 +97,11 @@ class _HomePageState extends State<HomePage> {
                       Icons.camera_alt,
                       color: Colors.white,
                     ),
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      await availableCameras().then((value) => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DocumentosPage(),
-                              fullscreenDialog: true));
+                              builder: (_) => CameraPage(cameras: value))));
                     },
                   ),
                 ),
@@ -104,3 +111,4 @@ class _HomePageState extends State<HomePage> {
         )));
   }
 }
+/**/

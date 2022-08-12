@@ -54,19 +54,19 @@ class Constants {
   static const kBorderColor = Color(0xFFEFEFEF);
 
   //text
-  static const title = "Google Sign In";
+  static const title = "Login do Google";
   static const textIntro = "Growing your \n business is ";
   static const textIntroDesc1 = "easier \n ";
   static const textIntroDesc2 = "then you think!";
   static const textSmallSignUp = "Sign up takes only 2 minutes!";
-  static const textSignIn = "Sign In";
-  static const textStart = "Get Started";
+  static const textSignIn = "Logar";
+  static const textStart = "Iniciar";
   static const textSignInTitle = "Bem Vindo";
   static const textSmallSignIn = "Faça login com Google";
-  static const textSignInGoogle = "Sign In With Google";
-  static const textAcc = "Don't have an account? ";
-  static const textSignUp = "Sign Up here";
-  static const textHome = "Home";
+  static const textSignInGoogle = "Faça login no Google";
+  // static const textAcc = "Don't have an account? ";
+  // static const textSignUp = "Sign Up here";
+  // static const textHome = "Home";
 
   //navigate
   static const signInNavigate = '/sign-in';
@@ -75,16 +75,4 @@ class Constants {
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,
       statusBarIconBrightness: Brightness.dark);
-}
-class Tarefa 
-{
-  late String nome;
-  late DateTime data;
-  late bool concluida;
-
-  Tarefa(String nome) {
-    this.concluida = false;
-    this.nome = nome;
-    this.data = DateTime.now();
-  } 
 }

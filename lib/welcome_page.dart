@@ -46,10 +46,10 @@ class _WelcomePageState extends State<WelcomePage> {
                               fontSize: 30.0)),
                     ])),
                 SizedBox(height: size.height * 0.01),
-                Text(
-                  Constants.textSmallSignUp,
-                  style: TextStyle(color: Constants.kDarkGreyColor),
-                ),
+                // Text(
+                //   Constants.textSmallSignUp,
+                //   style: TextStyle(color: Constants.kDarkGreyColor),
+                // ),
                 SizedBox(height: size.height * 0.1),
                 SizedBox(
                   width: size.width * 0.8,
@@ -71,21 +71,21 @@ class _WelcomePageState extends State<WelcomePage> {
                             BorderSide.none)),
                   ),
                 ),
-                SizedBox(
-                  width: size.width * 0.8,
-                  // child: OutlinedButton(
-                  //   onPressed: () {},
-                  //   child: Text(
-                  //     Constants.textSignIn,
-                  //     style: TextStyle(color: Constants.kBlackColor),
-                  //   ),
-                  //   style: ButtonStyle(
-                  //       backgroundColor: MaterialStateProperty.all<Color>(
-                  //           Constants.kGreyColor),
-                  //       side: MaterialStateProperty.all<BorderSide>(
-                  //           BorderSide.none)),
-                  // ),
-                )
+                // SizedBox(
+                //   width: size.width * 0.8,
+                //   // child: OutlinedButton(
+                //   //   onPressed: () {},
+                //   //   child: Text(
+                //   //     Constants.textSignIn,
+                //   //     style: TextStyle(color: Constants.kBlackColor),
+                //   //   ),
+                //   //   style: ButtonStyle(
+                //   //       backgroundColor: MaterialStateProperty.all<Color>(
+                //   //           Constants.kGreyColor),
+                //   //       side: MaterialStateProperty.all<BorderSide>(
+                //   //           BorderSide.none)),
+                //   // ),
+                // )
               ],
             ),
           ),
