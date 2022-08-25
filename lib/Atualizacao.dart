@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tcc_app/testeExibição.dart';
+import 'package:tcc_app/testeExibicao.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Atualizacao extends StatefulWidget {
@@ -36,6 +37,8 @@ class _AtualizacaoState extends State<Atualizacao> {
 
     final firestoreInstance = FirebaseFirestore.instance;
     var firebaseUser = FirebaseAuth.instance.currentUser;
+    bool apagado = false;
+    bool concluido = false;
 
     return MaterialApp(
       home: Scaffold(
@@ -48,12 +51,39 @@ class _AtualizacaoState extends State<Atualizacao> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  
+                  DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          hint: Text(
+                            'Select Item',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).hintColor,
+                            ),
+                          ),
+                          items: items
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value as String;
+                            });
+                          },
+                        ),
+                      ),
                 ],
               ),
               Column(
@@ -66,6 +96,8 @@ class _AtualizacaoState extends State<Atualizacao> {
                           firestoreInstance.collection(firebaseUser!.uid).add({
                             "tipo de lixo": selectedValue,
                             "dataAtualização": DateTime.now(),
+                            "concluido": concluido,
+                            "apagado": apagado
                           });
                           Navigator.push(
                               context,

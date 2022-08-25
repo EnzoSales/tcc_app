@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
 import 'package:tcc_app/cameraPage.dart';
-import 'package:tcc_app/testeExibição.dart';
+import 'package:tcc_app/testeExibicao.dart';
 import 'package:camera/camera.dart';
 
 class HomePage extends StatefulWidget {

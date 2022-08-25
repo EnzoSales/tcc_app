@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/sign_in_page.dart';
-import 'package:tcc_app/HomePage.dart';
+import 'package:tcc_app/homePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
