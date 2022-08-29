@@ -55,18 +55,15 @@ class Constants {
 
   //text
   static const title = "Login do Google";
-  static const textIntro = "Growing your \n business is ";
-  static const textIntroDesc1 = "easier \n ";
-  static const textIntroDesc2 = "then you think!";
+  static const textIntro = "Aplicativo de denuncias \n de descarte ";
+  static const textIntroDesc1 = "errado \n ";
+  static const textIntroDesc2 = "de residuos.";
   static const textSmallSignUp = "Sign up takes only 2 minutes!";
   static const textSignIn = "Logar";
   static const textStart = "Iniciar";
   static const textSignInTitle = "Bem Vindo";
   static const textSmallSignIn = "Faça login com Google";
   static const textSignInGoogle = "Faça login no Google";
-  // static const textAcc = "Don't have an account? ";
-  // static const textSignUp = "Sign Up here";
-  // static const textHome = "Home";
 
   //navigate
   static const signInNavigate = '/sign-in';

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_app/main.dart';
 import 'package:tcc_app/cameraPage.dart';
-import 'package:tcc_app/testeExibicao.dart';
+import 'package:tcc_app/Exibicao.dart';
 import 'package:camera/camera.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,59 +52,65 @@ class _HomePageState extends State<HomePage> {
           systemOverlayStyle:
               SystemUiOverlayStyle(statusBarColor: Colors.purple),
           title: Text("Home"),
-        ),
-        body: Center(
-            child: Column(
-          children: <Widget>[
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
+          leading: Container(
                       child: CircleAvatar(
                     backgroundImage: NetworkImage(user!.photoURL!),
                     radius: 20,
-                  ))
-                ]),
+                  )),
+        ),
+        body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Container(
-                  color: Color.fromARGB(255, 2, 141, 255),
-                  child: TextButton(
-                    onPressed: () async {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => MyApp()));
-                    },
-                    child: Text(
-                      "Denuncias",
-                    ),
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      primary: Color.fromARGB(255, 255, 255, 255),
-                      textStyle: const TextStyle(fontSize: 20),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 25, 25, 25),
+                  child: Container(
+                    color: Color.fromARGB(255, 2, 141, 255),
+                    child: TextButton(
+                      onPressed: () async {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => MyApp()));
+                      },
+                      child: Text(
+                        "Denuncias",
+                      ),
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(16.0),
+                        primary: Color.fromARGB(255, 255, 255, 255),
+                        textStyle: const TextStyle(fontSize: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                      ),                      
                     ),
                   ),
-                  
                 ),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.purple,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 25, 25, 25),
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.purple,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        await availableCameras().then((value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => CameraPage(cameras: value))));
+                      },
                     ),
-                    onPressed: () async {
-                      await availableCameras().then((value) => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => CameraPage(cameras: value))));
-                    },
                   ),
-                ),
+                )
               ],
             )
           ],

@@ -27,23 +27,14 @@ class AddData extends StatelessWidget {
   final firestoreInstance = FirebaseFirestore.instance;
   var firebaseUser = FirebaseAuth.instance.currentUser;
 
-  //SS: Fiz esta mudança no getList
-  // Stream<QuerySnapshot> _getList() {
   Future<QuerySnapshot<Map<String, dynamic>>> _getList() {
     var dados = firestoreInstance
         .collection(firebaseUser!.uid)
-        //SS: Exclui o where e tratar todos os dados
-        // .where()
-        // .where(_where)
-        // .limit(99)
         .get()
         .then((value) {
       print(value.docs.asMap());
-      // dados  = value;
       return value;
     });
-    // .snapshots();
-    //Fim mudança no getList
 
     return dados;
   }
@@ -73,7 +64,7 @@ class AddData extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream: _getList()
-            .asStream(), //SS: Acho que inclui este asStream pois o builder espera um Stream
+            .asStream(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -81,57 +72,72 @@ class AddData extends StatelessWidget {
             );
           }
 
-          //SS: Fiz as mudanças no ListView.builder
           return new ListView.builder(
               itemCount: snapshot.data!.size,
               itemBuilder: (BuildContext context, int index) {
-                var myData = snapshot.data!.docs.elementAt(index); //.data();
+                var myData = snapshot.data!.docs.elementAt(index);
+
+                SlidableAction _act_delete = new SlidableAction(
+                          flex: 2,
+                          onPressed: (context) => 
+                            FirebaseFirestore.instance.collection(firebaseUser!.uid).doc(myData.id).update({
+                              "apagado": true
+                            }),
+                          backgroundColor: Color.fromARGB(255, 212, 28, 28),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        );
+                SlidableAction _act_concluir = new SlidableAction(
+                          onPressed: (context) => 
+                            FirebaseFirestore.instance.collection(firebaseUser!.uid).doc(myData.id).update({
+                              "concluido": true
+                            }),
+                          backgroundColor: Color.fromARGB(255, 3, 207, 13),
+                          foregroundColor: Colors.white,
+                          icon: Icons.check,
+                          label: 'Concluido',
+                        );
+                SlidableAction _act_editar = new SlidableAction(
+                          onPressed: (context) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Atualizacao(myData:myData.id),
+                            ),
+                          ),
+                          backgroundColor: Color(0xFF0392CF),
+                          foregroundColor: Colors.white,
+                          icon: Icons.edit_note,
+                          label: 'Editar',
+                        );
+                
 
                 var isEnabled = true;
                 if (myData['apagado'] == true) {
                   isEnabled = false;
                 }
+                else if(myData['concluido'] == true){
+                  isEnabled = false;
+                }
 
-                return new Slidable(
+                List<SlidableAction> myAct = [];
+                if (isEnabled == true) {
+                  myAct = [_act_delete, _act_concluir, _act_editar];
+                }
+                String id = myData.id;
+
+                  return new Slidable(
+                  key: ValueKey(0),
+                    endActionPane: ActionPane(
+                      motion: ScrollMotion(),
+                      children: myAct,
+                    ),
                     child: ListTile(
-                  title: Text(myData.get('texto')),
+                  title: Text(myData.id),
                   subtitle: Text(myData.get('tipo de lixo')),
                   enabled: isEnabled,
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                  ),
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Atualizacao(),
-                      ),
-                    );
-                  },
                 ));
-
-                // children: snapshot.data!.docs.map((document) {
-                //   Timestamp t = document['data'];
-                //   DateTime d = t.toDate();
-                //   return Slidable(
-                //       child: ListTile(
-                //     title: Text("Tipo de Lixo: " + document['tipo de lixo']),
-                //     subtitle: Text(d.toString()),
-                //     trailing: Icon(
-                //       Icons.arrow_forward_ios,
-                //     ),
-                //     onTap: () async {
-                //       await Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //           builder: (context) => Atualizacao(),
-                //         ),
-                //       );
-                //     },
-                //   ));
-                // }).toList(),
               });
-          // SS: Fim Mudanças no ListView
         },
       ),
     );

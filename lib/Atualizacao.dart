@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tcc_app/testeExibicao.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Atualizacao extends StatefulWidget {
-  const Atualizacao({Key? key}) : super(key: key);
+  final String myData;
+  const Atualizacao({Key? key, required this.myData }) : super(key: key);
 
   @override
   State<Atualizacao> createState() => _AtualizacaoState();
@@ -37,8 +37,6 @@ class _AtualizacaoState extends State<Atualizacao> {
 
     final firestoreInstance = FirebaseFirestore.instance;
     var firebaseUser = FirebaseAuth.instance.currentUser;
-    bool apagado = false;
-    bool concluido = false;
 
     return MaterialApp(
       home: Scaffold(
@@ -93,17 +91,11 @@ class _AtualizacaoState extends State<Atualizacao> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          firestoreInstance.collection(firebaseUser!.uid).add({
+                          firestoreInstance.collection(firebaseUser!.uid).doc(widget.myData).update({
                             "tipo de lixo": selectedValue,
                             "dataAtualização": DateTime.now(),
-                            "concluido": concluido,
-                            "apagado": apagado
                           });
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyApp(),
-                                  fullscreenDialog: true));
+                          Navigator.pop(context);
                         },
                         child: Text("Enviar"))
                   ])
